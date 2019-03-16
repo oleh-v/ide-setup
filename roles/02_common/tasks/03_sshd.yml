@@ -13,5 +13,4 @@
     regexp: "#AddressFamily any"
     replace: "AddressFamily inet"
 
-  notify: restart sshd
 

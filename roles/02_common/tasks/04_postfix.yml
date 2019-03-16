@@ -13,5 +13,4 @@
     regexp: "^mydestination = .*"
     replace: "mydestination = localhost"
 
-  notify: restart postfix
 

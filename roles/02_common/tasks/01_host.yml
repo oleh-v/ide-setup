@@ -12,4 +12,3 @@
       127.0.0.1 {{ hostname }}
 
       ::1 {{ hostname }}
-  notify: restart network

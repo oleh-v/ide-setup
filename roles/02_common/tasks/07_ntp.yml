@@ -12,7 +12,6 @@
     src: ntp.conf.j2
     dest: /etc/ntp.conf
   tags: ntp
-  notify: restart ntp
 
 - name: Start the ntp service
   service:
