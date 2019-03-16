@@ -12,4 +12,6 @@
     dest: /{{ide_dir}}/ide/
 
 - name: run ide
-  command: sh /{{ide_dir}}/ide/run.sh
+  shell: /{{ide_dir}}/ide/run.sh
+  args:
+    chdir: /{{ide_dir}}/ide/
