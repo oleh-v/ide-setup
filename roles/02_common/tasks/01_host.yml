@@ -1,0 +1,15 @@
+---
+# Setup hostname
+
+- name: Set hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: hosts file
+  blockinfile:
+    path: /etc/hosts
+    block:
+      127.0.0.1 {{ hostname }}
+
+      ::1 {{ hostname }}
+  notify: restart network

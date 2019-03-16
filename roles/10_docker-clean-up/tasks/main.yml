@@ -1,0 +1,15 @@
+---
+
+- name: Set cron job for CleanUp docker unused images
+  cron:
+    name: "CleanUp docker unused images"
+    minute: "0"
+    hour: "0"
+    job: "docker rmi $(docker images -f dangling=true -q)"
+
+- name: Set cron job for CleanUp docker unused volumes
+  cron:
+    name: "CleanUp docker unused volumes"
+    minute: "0"
+    hour: "0"
+    job: "docker volume rm $(docker volume ls -f dangling=true -q)"

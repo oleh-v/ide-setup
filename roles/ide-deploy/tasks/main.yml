@@ -1,0 +1,14 @@
+---
+- name: create documentroot directory
+  file:
+    path: /{{ide_dir}}
+    state: directory
+    mode: 0775
+
+- name: git clone from repository
+  git:
+    repo: https://github.com/oleh-v/ide.git
+    dest: /{{ide_dir}}/
+
+- name: run ide
+  command: sh /{{ide_dir}}/ide/run.sh

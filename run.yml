@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  become: yes
+  gather_facts: no
+
+  vars_prompt:
+  - name: target_machine
+    prompt: Please enter IP (or hostname) of target machine
+    private: no
+
+  tasks:
+    - add_host:
+        name: "{{ target_machine }}"
+        groups: dynamically_created_hosts
+
+- name: Setup dev enironment
+  hosts: dynamically_created_hosts
+  remote_user: root
+  
+  vars_prompt:
+
+    - name: hostname
+      prompt: Please enter new hostname for target machine
+      private: no
+
+    - name: ide_dir
+      prompt: Please enter directory name for IDE
+      private: no
+
+  roles:
+    - { role: 00_preparing, when: ansible_distribution == "CentOS" }
+    - { role: 01_user, when: ansible_distribution == "CentOS" }
+    - { role: 02_common, when: ansible_distribution == "CentOS" }
+    - 03_docker-install
+    - 04_docker-compose
+    - { role: 08_selinux, when: ansible_distribution == "CentOS" }
+    - { role: 09_firewalld, when: ansible_distribution == "CentOS" }
+    - 10_docker-clean-up
+    - ide-deploy
+    - { role: 11_reboot, when: ansible_distribution == "CentOS" }
